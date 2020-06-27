@@ -1,14 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vocamera/widgets/drawer.dart';
 import 'package:vocamera/widgets/logo.dart';
 import 'package:vocamera/helpers/googleSignIn.dart';
+import 'package:provider/provider.dart';
+import 'package:vocamera/models/user.dart';
 
-class Login extends StatefulWidget {
-  @override
-  _LoginState createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
+class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,30 +14,34 @@ class _LoginState extends State<Login> {
         title: new Text('ログイン'),
       ),
       drawer: buildDrawer(context),
-      body: Container(
-        color: Colors.white,
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Logo(320),
-              SizedBox(height: 50),
-              _signInButton(),
-            ],
-          ),
-        ),
-      ),
+      body: Consumer<User>(builder: (context, user, _) {
+        return Container(
+          color: Colors.white,
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                logo(320),
+                SizedBox(height: 50),
+                _signInButton(context, (FirebaseUser firebaseUser) => {
+                  user.setUser(firebaseUser)
+                }),
+              ],
+            ),
+          )
+        );
+      })
     );
   }
 
-  Widget _signInButton() {
+  Widget _signInButton(BuildContext context, Function callback) {
     return OutlineButton(
       splashColor: Colors.grey,
-      onPressed: () {
-        signInWithGoogle().whenComplete(() {
-          Navigator.pushNamed(context, "/list");
-        });
+      onPressed: () async {
+        FirebaseUser user = await signInWithGoogle();
+        callback(user);
+        Navigator.pushNamed(context, "/list");
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,

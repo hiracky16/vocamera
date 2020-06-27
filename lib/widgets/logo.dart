@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
 
-Widget Logo(double height) {
+Widget logo(double height) {
   return Image(image: AssetImage("assets/images/logo.png"), height: height);
 }

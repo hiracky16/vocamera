@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1043314612506",
+    "firebase_url": "https://vocamera-b6917.firebaseio.com",
+    "project_id": "vocamera-b6917",
+    "storage_bucket": "vocamera-b6917.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043314612506:android:e33fbc0cea986d289274a3",
+        "android_client_info": {
+          "package_name": "com.hiracky16.vocamera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1043314612506-o5969got0al7sl6comgct239f4iqahup.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hiracky16.vocamera",
+            "certificate_hash": "7a1bd3dec6bf034aaa97cbc51e7ce197c81be003"
+          }
+        },
+        {
+          "client_id": "1043314612506-tpt3cl2nj98cjinimlk8acsqpcj66vnt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMWFXiqAZm8SQBPH5GlEAo943tIgjMtQA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043314612506-tpt3cl2nj98cjinimlk8acsqpcj66vnt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

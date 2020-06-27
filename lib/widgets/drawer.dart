@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vocamera/helpers/googleSignIn.dart';
 
 Widget buildDrawer(BuildContext context) {
   return Drawer(
@@ -16,12 +17,12 @@ Widget buildDrawer(BuildContext context) {
             color: Colors.yellow,
           ),
         ),
-        // ListTile(
-        //   title: Text('単語リスト'),
-        //   onTap: () {
-        //     Navigator.pushNamed(context, '/list');
-        //   },
-        // ),
+        ListTile(
+          title: Text('単語リスト'),
+          onTap: () {
+            Navigator.pushNamed(context, '/list');
+          },
+        ),
         // ListTile(
         //   title: Text('カメラで登録'),
         //   onTap: () {
@@ -40,12 +41,13 @@ Widget buildDrawer(BuildContext context) {
         //     Navigator.pushNamed(context, '/quiz');
         //   },
         // ),
-        // ListTile(
-        //   title: Text('ログアウト'),
-        //   onTap: () {
-        //     Navigator.pushNamed(context, '/login');
-        //   },
-        // ),
+        ListTile(
+          title: Text('ログアウト'),
+          onTap: () async {
+            await signOutGoogle();
+            Navigator.pushNamed(context, '/login');
+          },
+        ),
       ],
     ),
   );

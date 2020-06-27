@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
 import 'package:provider/provider.dart';
 import 'package:vocamera/pages/login.dart';
+import 'package:vocamera/pages/words.dart';
 
 void main() {
   enableFlutterDriverExtension();
@@ -18,6 +19,10 @@ class MyApp extends StatelessWidget {
               visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
             home: Login(),
+            routes: <String, WidgetBuilder>{
+              '/login': (_) => new Login(),
+              '/list': (_) => new Words()
+            },
           );
   }
 }

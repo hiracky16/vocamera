@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:vocamera/widgets/drawer.dart';
 import 'package:vocamera/widgets/logo.dart';
-import 'package:vocamera/helpers/googleSignIn.dart';
+import 'package:vocamera/helpers/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:vocamera/models/user.dart';
 

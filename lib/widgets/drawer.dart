@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vocamera/helpers/googleSignIn.dart';
+import 'package:vocamera/helpers/firebase_auth.dart';
 
 Widget buildDrawer(BuildContext context) {
   return Drawer(
@@ -29,12 +29,12 @@ Widget buildDrawer(BuildContext context) {
         //     Navigator.pushNamed(context, '/camera');
         //   },
         // ),
-        // ListTile(
-        //   title: Text('単語登録'),
-        //   onTap: () {
-        //     Navigator.pushNamed(context, '/register');
-        //   },
-        // ),
+        ListTile(
+          title: Text('単語登録'),
+          onTap: () {
+            Navigator.pushNamed(context, '/add');
+          },
+        ),
         // ListTile(
         //   title: Text('クイズ'),
         //   onTap: () {
@@ -43,8 +43,8 @@ Widget buildDrawer(BuildContext context) {
         // ),
         ListTile(
           title: Text('ログアウト'),
-          onTap: () async {
-            await signOutGoogle();
+          onTap: () {
+            signOutGoogle();
             Navigator.pushNamed(context, '/login');
           },
         ),

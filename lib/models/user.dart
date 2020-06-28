@@ -30,4 +30,21 @@ class User extends ChangeNotifier {
       .setData({'word': this.addWord, 'user_id': userId, 'timestamp': now });
     setAddWord('');
   }
+
+  Stream<QuerySnapshot> getWords() {
+    return _fireStore
+      .collection('users')
+      .document(this.user.uid)
+      .collection('words')
+      .snapshots();
+  }
+
+  void deleteWord(String id) async {
+    _fireStore
+      .collection('users')
+      .document(this.user.uid)
+      .collection('words')
+      .document(id)
+      .delete();
+  }
 }

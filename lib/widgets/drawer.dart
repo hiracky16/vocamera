@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vocamera/helpers/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:vocamera/view_models/login_view_model.dart';
 
 Widget buildDrawer(BuildContext context) {
   return Drawer(
@@ -44,7 +46,7 @@ Widget buildDrawer(BuildContext context) {
         ListTile(
           title: Text('ログアウト'),
           onTap: () {
-            signOutGoogle();
+            Provider.of<LoginViewModel>(context, listen: false).signOut();
             Navigator.pushNamed(context, '/login');
           },
         ),

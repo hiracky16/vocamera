@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vocamera/view_models/login_view_model.dart';
 import 'package:vocamera/widgets/drawer.dart';
 import 'package:vocamera/widgets/logo.dart';
-import 'package:vocamera/helpers/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:vocamera/models/user.dart';
 
 class Login extends StatelessWidget {
   @override
@@ -14,8 +12,7 @@ class Login extends StatelessWidget {
         title: new Text('ログイン'),
       ),
       drawer: buildDrawer(context),
-      body: Consumer<User>(builder: (context, user, _) {
-        return Container(
+      body: Container(
           color: Colors.white,
           child: Center(
             child: Column(
@@ -24,14 +21,13 @@ class Login extends StatelessWidget {
               children: <Widget>[
                 logo(320),
                 SizedBox(height: 50),
-                _signInButton(context, (FirebaseUser firebaseUser) => {
-                  user.setUser(firebaseUser)
+                _signInButton(context, () {
+                  Navigator.pushNamed(context, "/list");
                 }),
               ],
             ),
           )
-        );
-      })
+        )
     );
   }
 
@@ -39,9 +35,8 @@ class Login extends StatelessWidget {
     return OutlineButton(
       splashColor: Colors.grey,
       onPressed: () async {
-        FirebaseUser user = await signInWithGoogle();
-        callback(user);
-        Navigator.pushNamed(context, "/list");
+        await Provider.of<LoginViewModel>(context, listen: false).signIn();
+        callback();
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,

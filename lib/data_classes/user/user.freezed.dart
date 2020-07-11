@@ -12,9 +12,10 @@ T _$identity<T>(T value) => value;
 class _$UserTearOff {
   const _$UserTearOff();
 
-  _User call({FirebaseUser firebaseUser}) {
+  _User call({FirebaseUser firebaseUser, String word}) {
     return _User(
       firebaseUser: firebaseUser,
+      word: word,
     );
   }
 }
@@ -24,6 +25,7 @@ const $User = _$UserTearOff();
 
 mixin _$User {
   FirebaseUser get firebaseUser;
+  String get word;
 
   $UserCopyWith<User> get copyWith;
 }
@@ -31,7 +33,7 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
-  $Res call({FirebaseUser firebaseUser});
+  $Res call({FirebaseUser firebaseUser, String word});
 }
 
 class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
@@ -44,11 +46,13 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call({
     Object firebaseUser = freezed,
+    Object word = freezed,
   }) {
     return _then(_value.copyWith(
       firebaseUser: firebaseUser == freezed
           ? _value.firebaseUser
           : firebaseUser as FirebaseUser,
+      word: word == freezed ? _value.word : word as String,
     ));
   }
 }
@@ -57,7 +61,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) then) =
       __$UserCopyWithImpl<$Res>;
   @override
-  $Res call({FirebaseUser firebaseUser});
+  $Res call({FirebaseUser firebaseUser, String word});
 }
 
 class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
@@ -71,24 +75,28 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   @override
   $Res call({
     Object firebaseUser = freezed,
+    Object word = freezed,
   }) {
     return _then(_User(
       firebaseUser: firebaseUser == freezed
           ? _value.firebaseUser
           : firebaseUser as FirebaseUser,
+      word: word == freezed ? _value.word : word as String,
     ));
   }
 }
 
 class _$_User with DiagnosticableTreeMixin implements _User {
-  const _$_User({this.firebaseUser});
+  const _$_User({this.firebaseUser, this.word});
 
   @override
   final FirebaseUser firebaseUser;
+  @override
+  final String word;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(firebaseUser: $firebaseUser)';
+    return 'User(firebaseUser: $firebaseUser, word: $word)';
   }
 
   @override
@@ -96,7 +104,8 @@ class _$_User with DiagnosticableTreeMixin implements _User {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'User'))
-      ..add(DiagnosticsProperty('firebaseUser', firebaseUser));
+      ..add(DiagnosticsProperty('firebaseUser', firebaseUser))
+      ..add(DiagnosticsProperty('word', word));
   }
 
   @override
@@ -105,12 +114,16 @@ class _$_User with DiagnosticableTreeMixin implements _User {
         (other is _User &&
             (identical(other.firebaseUser, firebaseUser) ||
                 const DeepCollectionEquality()
-                    .equals(other.firebaseUser, firebaseUser)));
+                    .equals(other.firebaseUser, firebaseUser)) &&
+            (identical(other.word, word) ||
+                const DeepCollectionEquality().equals(other.word, word)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(firebaseUser);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(firebaseUser) ^
+      const DeepCollectionEquality().hash(word);
 
   @override
   _$UserCopyWith<_User> get copyWith =>
@@ -118,10 +131,12 @@ class _$_User with DiagnosticableTreeMixin implements _User {
 }
 
 abstract class _User implements User {
-  const factory _User({FirebaseUser firebaseUser}) = _$_User;
+  const factory _User({FirebaseUser firebaseUser, String word}) = _$_User;
 
   @override
   FirebaseUser get firebaseUser;
+  @override
+  String get word;
   @override
   _$UserCopyWith<_User> get copyWith;
 }

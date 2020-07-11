@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:vocamera/data_classes/user/user.dart';
+import 'package:vocamera/notifilers/user_notifier.dart';
 import 'package:vocamera/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:vocamera/widgets/button.dart';
@@ -8,12 +10,14 @@ var wordController = TextEditingController();
 class AddWord extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    bool validate(String word) {
-      return word != null && word.length > 0;
+    bool validate() {
+      final word = Provider.of<UserNotifier>(context, listen: false).word;
+      print(word);
+      return word.length > 0;
     }
 
     void register() async {
-      // await user.postAddWord();
+      await Provider.of<UserNotifier>(context, listen: false).addWord();
       wordController.text = '';
       Navigator.pushNamed(context, "/list");
     }
@@ -34,7 +38,7 @@ class AddWord extends StatelessWidget {
                       decoration: InputDecoration(
                           labelText: '登録する単語を入力', border: OutlineInputBorder()),
                       controller: wordController,
-                      onChanged: (value) => {},
+                      onChanged: (value) => Provider.of<UserNotifier>(context, listen: false).inputWord(value),
                       style: new TextStyle(
                           fontSize: 24.0,
                           color: const Color(0xFF000000),
@@ -44,8 +48,7 @@ class AddWord extends StatelessWidget {
                 Padding(
                     padding: const EdgeInsets.all(24.0),
                     child: button('登録', () {
-                      var flag = validate('');
-                      flag ? register() : print('空');
+                      validate() ? register() : print('空');
                     }))
               ])
     );

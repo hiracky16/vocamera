@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vocamera/helpers/firebase_auth.dart';
 import 'package:provider/provider.dart';
-import 'package:vocamera/view_models/login_view_model.dart';
+import 'package:vocamera/notifilers/user_notifier.dart';
 
 Widget buildDrawer(BuildContext context) {
   return Drawer(
@@ -46,7 +45,7 @@ Widget buildDrawer(BuildContext context) {
         ListTile(
           title: Text('ログアウト'),
           onTap: () {
-            Provider.of<LoginViewModel>(context, listen: false).signOut();
+            Provider.of<UserNotifier>(context, listen: false).signOut();
             Navigator.pushNamed(context, '/login');
           },
         ),

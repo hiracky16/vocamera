@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_driver/driver_extension.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:vocamera/data_classes/user/user.dart';
+import 'package:vocamera/notifilers/user_notifier.dart';
 import 'package:vocamera/pages/add_word.dart';
 import 'package:vocamera/pages/login.dart';
 import 'package:vocamera/pages/words.dart';
 import 'package:vocamera/repositories/firebase_auth.dart';
-import 'package:vocamera/view_models/login_view_model.dart';
+import 'package:vocamera/repositories/firestore.dart';
 
 void main() {
   // enableFlutterDriverExtension();
@@ -17,16 +17,21 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-          providers: [
-            Provider(create: (_) => FirebaseAuthRepository()),
-          ],
-          child: StateNotifierProvider<LoginViewModel, User>(
-            create: (context) => LoginViewModel(),
-            child: _MainView(),
-          ),
-    );
+    return mainProvider();
   }
+}
+
+MultiProvider mainProvider() {
+  return MultiProvider(
+    providers: [
+      Provider(create: (_) => FirebaseAuthRepository()),
+      Provider(create: (_) => FirestoreRepository()),
+    ],
+    child: StateNotifierProvider<UserNotifier, User>(
+      create: (context) => UserNotifier(),
+      child: _MainView()
+    ),
+  );
 }
 
 class _MainView extends StatelessWidget {

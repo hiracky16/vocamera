@@ -8,5 +8,6 @@ part 'user.freezed.dart';
 abstract class User with _$User {
   const factory User({
     FirebaseUser firebaseUser,
+    String word
   }) = _User;
 }

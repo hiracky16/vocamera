@@ -24,12 +24,12 @@ Widget buildDrawer(BuildContext context) {
             Navigator.pushNamed(context, '/list');
           },
         ),
-        // ListTile(
-        //   title: Text('カメラで登録'),
-        //   onTap: () {
-        //     Navigator.pushNamed(context, '/camera');
-        //   },
-        // ),
+        ListTile(
+          title: Text('カメラで登録'),
+          onTap: () {
+            Navigator.pushNamed(context, '/camera');
+          },
+        ),
         ListTile(
           title: Text('単語登録'),
           onTap: () {

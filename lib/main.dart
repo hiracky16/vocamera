@@ -8,6 +8,7 @@ import 'package:vocamera/pages/login.dart';
 import 'package:vocamera/pages/words.dart';
 import 'package:vocamera/repositories/firebase_auth.dart';
 import 'package:vocamera/repositories/firestore.dart';
+import 'package:vocamera/pages/camera.dart';
 
 void main() {
   // enableFlutterDriverExtension();
@@ -47,7 +48,8 @@ class _MainView extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/login': (_) => new Login(),
         '/list': (_) => new Words(),
-        '/add': (_) => new AddWord()
+        '/add': (_) => new AddWord(),
+        '/camera': (_) => new Camera()
       },
     );
   }

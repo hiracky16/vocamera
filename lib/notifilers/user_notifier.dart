@@ -1,7 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:provider/provider.dart';
 import 'package:vocamera/data_classes/user/user.dart';
+import 'package:vocamera/data_classes/word/word.dart';
 import 'package:vocamera/repositories/firebase_auth.dart';
 import 'package:vocamera/repositories/firestore.dart';
 
@@ -11,6 +13,8 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
   FirestoreRepository get storeRepository => read<FirestoreRepository>();
 
   String get word => state.word;
+  List<Word> get words => state.words;
+  String get _userId => state.firebaseUser.uid;
 
   signIn() async {
     final user = await authRepository.signIn();
@@ -30,6 +34,15 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
   }
 
   addWord() async {
-    await storeRepository.postWord(state.firebaseUser.uid, state.word);
+    await storeRepository.postWord(_userId, state.word);
+  }
+
+  fetchWords() async {
+    List<Word> words = await storeRepository.fetchWords(_userId);
+    state = state.copyWith(words: words);
+  }
+
+  deleteWord(String id) async {
+    await storeRepository.deleteWord(_userId, id);
   }
 }

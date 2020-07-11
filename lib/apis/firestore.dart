@@ -1,14 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:vocamera/data_classes/word/word.dart';
 
 class FirestoreApi {
   static final Firestore _fireStore = Firestore.instance;
 
-  static Stream<QuerySnapshot> getWords(String userId) {
-    return _fireStore
+  static Future<List<Word>> fetchWords(String userId) async {
+    final res = await _fireStore
       .collection('users')
       .document(userId)
       .collection('words')
-      .snapshots();
+      .getDocuments();
+    List<Word> words = [];
+    res.documents.forEach((element) {
+      Word w = Word(element.documentID, element['word']);
+      words.add(w);
+    });
+    return words;
   }
 
   static void postWord(String userId, String word) async {
@@ -19,5 +26,14 @@ class FirestoreApi {
       .collection('words')
       .document()
       .setData({'word': word, 'user_id': userId, 'timestamp': now });
+  }
+
+  static void deleteWord(String userId, String id) async {
+    await _fireStore
+      .collection('users')
+      .document(userId)
+      .collection('words')
+      .document(id)
+      .delete();
   }
 }

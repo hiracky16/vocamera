@@ -11,9 +11,8 @@ class FirestoreApi {
       .collection('words')
       .getDocuments();
     List<Word> words = [];
-    res.documents.forEach((element) {
-      Word w = Word(element.documentID, element['word']);
-      words.add(w);
+    res.documents.forEach((element) => {
+      words.add(Word(element.documentID, element['word']))
     });
     return words;
   }

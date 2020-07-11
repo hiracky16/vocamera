@@ -9,6 +9,7 @@ import 'package:vocamera/pages/words.dart';
 import 'package:vocamera/repositories/firebase_auth.dart';
 import 'package:vocamera/repositories/firestore.dart';
 import 'package:vocamera/pages/camera.dart';
+import 'package:vocamera/repositories/mlkit.dart';
 
 void main() {
   // enableFlutterDriverExtension();
@@ -27,6 +28,7 @@ MultiProvider mainProvider() {
     providers: [
       Provider(create: (_) => FirebaseAuthRepository()),
       Provider(create: (_) => FirestoreRepository()),
+      Provider(create: (_) => MlkitRepository()),
     ],
     child: StateNotifierProvider<UserNotifier, User>(
       create: (context) => UserNotifier(),

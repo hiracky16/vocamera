@@ -1,16 +1,17 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_state_notifier/flutter_state_notifier.dart';
+import 'dart:io';
+
 import 'package:state_notifier/state_notifier.dart';
-import 'package:provider/provider.dart';
 import 'package:vocamera/data_classes/user/user.dart';
 import 'package:vocamera/data_classes/word/word.dart';
 import 'package:vocamera/repositories/firebase_auth.dart';
 import 'package:vocamera/repositories/firestore.dart';
+import 'package:vocamera/repositories/mlkit.dart';
 
 class UserNotifier extends StateNotifier<User> with LocatorMixin {
   UserNotifier(): super(User(firebaseUser: null));
   FirebaseAuthRepository get authRepository => read<FirebaseAuthRepository>();
   FirestoreRepository get storeRepository => read<FirestoreRepository>();
+  MlkitRepository get mlkitRepository => read<MlkitRepository>();
 
   String get word => state.word;
   List<Word> get words => state.words;
@@ -44,5 +45,9 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
 
   deleteWord(String id) async {
     await storeRepository.deleteWord(_userId, id);
+  }
+
+  detectText(String filePath) async {
+    return await mlkitRepository.detectText(filePath);
   }
 }

@@ -3,7 +3,7 @@ class VisionWord {
   bool check;
 
   VisionWord(String text) {
-    text = text;
-    check = false;
+    this.text = text;
+    this.check = false;
   }
 }

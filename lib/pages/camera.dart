@@ -156,7 +156,12 @@ class _AddWordsState extends State<AddWords> {
   }
 
   void _registWords() {
-    // TODO: 登録
+    // TODO: 一括書き込みにしたい
+    words.forEach((w) {
+      if (w.check) {
+        Provider.of<UserNotifier>(context, listen: false).addWordByParamWord(w.text);
+      }
+    });
     Navigator.of(context).pushNamed("/list");
   }
 

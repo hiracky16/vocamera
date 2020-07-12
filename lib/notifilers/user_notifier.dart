@@ -38,6 +38,10 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
     await storeRepository.postWord(_userId, state.word);
   }
 
+  addWordByParamWord(String word) async {
+    await storeRepository.postWord(_userId, word);
+  }
+
   fetchWords() async {
     List<Word> words = await storeRepository.fetchWords(_userId);
     state = state.copyWith(words: words);

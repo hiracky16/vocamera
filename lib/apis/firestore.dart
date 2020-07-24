@@ -12,7 +12,7 @@ class FirestoreApi {
       .getDocuments();
     List<Word> words = [];
     res.documents.forEach((element) => {
-      words.add(Word(element.documentID, element['word']))
+      words.add(Word(element.documentID, element))
     });
     return words;
   }

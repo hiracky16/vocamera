@@ -6,8 +6,8 @@ import 'package:vocamera/widgets/drawer.dart';
 
 class Words extends StatelessWidget {
   Widget build(BuildContext context) {
-    Provider.of<UserNotifier>(context, listen: false).fetchWords();
-    List<Word> words = Provider.of<UserNotifier>(context, listen: false).words;
+    context.watch<UserNotifier>().fetchWords();
+    List<Word> words = context.watch<UserNotifier>().words;
 
     bool isExistWords() {
       return words != null && words.length > 0;
@@ -40,9 +40,9 @@ class Words extends StatelessWidget {
                               child: ExpansionTile(
                                   title: Text(w.word),
                                   children: <Widget>[
-                                    ListTile(title: Text('日本語: ${w.word}')),
-                                    ListTile(title: Text('英語: ${w.word}')),
-                                    ListTile(title: Text('中国語: ${w.word}')),
+                                    ListTile(title: Text('日本語: ${w.translated.ja}')),
+                                    ListTile(title: Text('英語: ${w.translated.en}')),
+                                    ListTile(title: Text('中国語: ${w.translated.zh}')),
                                   ])));
                     }).toList(),
                   )

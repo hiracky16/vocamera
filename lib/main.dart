@@ -12,32 +12,45 @@ import 'package:vocamera/pages/camera.dart';
 import 'package:vocamera/repositories/mlkit.dart';
 
 void main() {
+  final navigatorKey = GlobalKey<NavigatorState>();
   // enableFlutterDriverExtension();
-  runApp(MyApp());
+  runApp(MyApp(
+    navigatorKey: navigatorKey,
+  ));
 }
 
 class MyApp extends StatelessWidget {
+  final GlobalKey<NavigatorState> navigatorKey;
+
+  const MyApp({Key key, this.navigatorKey}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return mainProvider();
+    return mainProvider(navigatorKey);
   }
 }
 
-MultiProvider mainProvider() {
+MultiProvider mainProvider(GlobalKey<NavigatorState> navigatorKey) {
   return MultiProvider(
     providers: [
       Provider(create: (_) => FirebaseAuthRepository()),
       Provider(create: (_) => FirestoreRepository()),
       Provider(create: (_) => MlkitRepository()),
+      Provider.value(value: navigatorKey),
     ],
     child: StateNotifierProvider<UserNotifier, User>(
       create: (context) => UserNotifier(),
-      child: _MainView()
+      child: _MainView(
+        navigatorKey: navigatorKey,
+      ),
     ),
   );
 }
 
 class _MainView extends StatelessWidget {
+  final GlobalKey<NavigatorState> navigatorKey;
+  const _MainView({Key key, this.navigatorKey}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,9 +59,10 @@ class _MainView extends StatelessWidget {
         primarySwatch: Colors.yellow,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Login(),
+      navigatorKey: navigatorKey,
+      home: Login.wrapped(),
       routes: <String, WidgetBuilder>{
-        '/login': (_) => new Login(),
+        '/login': (_) => Login.wrapped(),
         '/list': (_) => new Words(),
         '/add': (_) => new AddWord(),
         '/camera': (_) => new Camera()

@@ -1,40 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:vocamera/notifilers/user_notifier.dart';
+import 'package:vocamera/viewmodels/login_viewmodel.dart';
 import 'package:vocamera/widgets/drawer.dart';
 import 'package:vocamera/widgets/logo.dart';
 import 'package:provider/provider.dart';
 
 class Login extends StatelessWidget {
+  const Login._({Key key}) : super(key: key);
+
+  static Widget wrapped() {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (context) => LoginViewModel(locator: context.read))
+      ],
+      child: const Login._(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: new AppBar(
-          title: new Text('ログイン'),
+      appBar: new AppBar(
+        title: new Text('ログイン'),
+      ),
+      drawer: buildDrawer(context),
+      body: Container(
+        color: Colors.white,
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              logo(320),
+              SizedBox(height: 50),
+              _signInButton(context),
+            ],
+          ),
         ),
-        drawer: buildDrawer(context),
-        body: Container(
-            color: Colors.white,
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  logo(320),
-                  SizedBox(height: 50),
-                  _signInButton(context, () {
-                    Navigator.pushNamed(context, "/list");
-                  }),
-                ],
-              ),
-            )));
+      ),
+    );
   }
 
-  Widget _signInButton(BuildContext context, Function callback) {
+  Widget _signInButton(BuildContext context) {
     return OutlineButton(
       splashColor: Colors.grey,
       onPressed: () async {
-        await context.read<UserNotifier>().signIn();
-        callback();
+        await context.read<LoginViewModel>().login();
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,

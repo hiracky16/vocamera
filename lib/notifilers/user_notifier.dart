@@ -6,7 +6,7 @@ import 'package:vocamera/repositories/firestore.dart';
 import 'package:vocamera/repositories/mlkit.dart';
 
 class UserNotifier extends StateNotifier<User> with LocatorMixin {
-  UserNotifier(): super(User(firebaseUser: null));
+  UserNotifier() : super(User(firebaseUser: null));
   FirebaseAuthRepository get authRepository => read<FirebaseAuthRepository>();
   FirestoreRepository get storeRepository => read<FirestoreRepository>();
   MlkitRepository get mlkitRepository => read<MlkitRepository>();
@@ -14,6 +14,7 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
   String get word => state.word;
   List<Word> get words => state.words;
   String get _userId => state.firebaseUser.uid;
+  bool get isLogined => state.firebaseUser?.uid != null;
 
   signIn() async {
     final user = await authRepository.signIn();

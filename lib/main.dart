@@ -63,7 +63,7 @@ class _MainView extends StatelessWidget {
       home: Login.wrapped(),
       routes: <String, WidgetBuilder>{
         '/login': (_) => Login.wrapped(),
-        '/list': (_) => new Words(),
+        '/list': (_) => Words.wrapped(),
         '/add': (_) => new AddWord(),
         '/camera': (_) => new Camera()
       },

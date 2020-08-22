@@ -33,7 +33,7 @@ class Words extends StatelessWidget {
                               secondaryBackground: Container(
                                   color: Colors.red), // end to startの背景
                               onDismissed: (direction) {
-                                Provider.of<UserNotifier>(context, listen: false).deleteWord(w.id);
+                                context.watch<UserNotifier>().deleteWord(w.id);
                                 Scaffold.of(context).showSnackBar(
                                     SnackBar(content: Text("削除しました")));
                               },

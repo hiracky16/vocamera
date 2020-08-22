@@ -11,13 +11,12 @@ class AddWord extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool validate() {
-      final word = Provider.of<UserNotifier>(context, listen: false).word;
-      print(word);
+      final word = context.select((UserNotifier user) => user.word);
       return word.length > 0;
     }
 
     void register() async {
-      await Provider.of<UserNotifier>(context, listen: false).addWord();
+      await context.watch<UserNotifier>().addWord();
       wordController.text = '';
       Navigator.pushNamed(context, "/list");
     }
@@ -38,7 +37,7 @@ class AddWord extends StatelessWidget {
                       decoration: InputDecoration(
                           labelText: '登録する単語を入力', border: OutlineInputBorder()),
                       controller: wordController,
-                      onChanged: (value) => Provider.of<UserNotifier>(context, listen: false).inputWord(value),
+                      onChanged: (value) => context.watch()<UserNotifier>().inputWord(value),
                       style: new TextStyle(
                           fontSize: 24.0,
                           color: const Color(0xFF000000),

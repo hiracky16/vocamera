@@ -45,7 +45,7 @@ Widget buildDrawer(BuildContext context) {
         ListTile(
           title: Text('ログアウト'),
           onTap: () {
-            Provider.of<UserNotifier>(context, listen: false).signOut();
+            context.read<UserNotifier>().signOut();
             Navigator.pushNamed(context, '/login');
           },
         ),

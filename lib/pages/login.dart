@@ -33,7 +33,7 @@ class Login extends StatelessWidget {
     return OutlineButton(
       splashColor: Colors.grey,
       onPressed: () async {
-        await Provider.of<UserNotifier>(context, listen: false).signIn();
+        await context.read<UserNotifier>().signIn();
         callback();
       },
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),

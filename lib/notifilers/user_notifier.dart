@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:state_notifier/state_notifier.dart';
 import 'package:vocamera/data_classes/user/user.dart';
 import 'package:vocamera/data_classes/word/word.dart';
@@ -20,7 +18,6 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
   signIn() async {
     final user = await authRepository.signIn();
     state = state.copyWith(firebaseUser: user);
-    print(state);
   }
 
   signOut() {
@@ -29,9 +26,7 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
   }
 
   inputWord(String value) {
-    print(state);
     state = state.copyWith(word: value);
-    print(state);
   }
 
   addWord() async {

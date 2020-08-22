@@ -12,10 +12,10 @@ class AddCameraWords extends StatefulWidget {
   final File _file;
 
   @override
-  _DetailWidgetState createState() => new _DetailWidgetState();
+  _AddCameraWordsState createState() => new _AddCameraWordsState();
 }
 
-class _DetailWidgetState extends State<DetailWidget> {
+class _AddCameraWordsState extends State<AddCameraWords> {
   FirebaseVisionTextDetector _detector = FirebaseVisionTextDetector.instance;
   List<ExtendVisionText> _currentTextLabels = <ExtendVisionText>[];
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;

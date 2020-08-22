@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:vocamera/data_classes/user/user.dart';
 import 'package:vocamera/notifilers/user_notifier.dart';
 import 'package:vocamera/pages/add_word.dart';
+import 'package:vocamera/pages/add_words_from_camera.dart';
 import 'package:vocamera/pages/login.dart';
 import 'package:vocamera/pages/words.dart';
 import 'package:vocamera/repositories/firebase_auth.dart';
@@ -65,7 +66,8 @@ class _MainView extends StatelessWidget {
         '/login': (_) => Login.wrapped(),
         '/list': (_) => Words.wrapped(),
         '/add': (_) => new AddWord(),
-        '/camera': (_) => new Camera()
+        '/camera': (_) => Camera.wrapped(),
+        '/add_words_from_camera': (_) => AddWordsFromCamera.withArguments()
       },
     );
   }

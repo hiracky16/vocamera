@@ -1,6 +1,7 @@
-
 // TODO: freezed の fromJson を使うといい感じになるかも
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+const CANT_TRANSLATE_MESSAGE = '翻訳できませんでした';
 
 class Word {
   String id;
@@ -11,8 +12,14 @@ class Word {
   Word(String id, DocumentSnapshot word) {
     this.id = id;
     this.word = word.data['word'];
-    var translated = word.data['translated'];
-    this.translated = Translated(translated['ja'], translated['en'], translated['zh']);
+    if (word.data.containsKey('translated')) {
+      final translated = word.data['translated'];
+      this.translated =
+          Translated(translated['ja'], translated['en'], translated['zh']);
+    } else {
+      this.translated = Translated(CANT_TRANSLATE_MESSAGE,
+          CANT_TRANSLATE_MESSAGE, CANT_TRANSLATE_MESSAGE);
+    }
   }
 }
 

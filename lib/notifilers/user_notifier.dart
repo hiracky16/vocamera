@@ -25,10 +25,6 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
     state = state.copyWith(firebaseUser: null);
   }
 
-  inputWord(String value) {
-    state = state.copyWith(word: value);
-  }
-
   addWord(String word) async {
     await storeRepository.postWord(_userId, word);
   }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vocamera/data_classes/word/visionWord.dart';
 import 'package:vocamera/viewmodels/add_words_from_camera_viewmodel.dart';
+import 'package:vocamera/widgets/button.dart';
 import 'package:vocamera/widgets/drawer.dart';
 import 'package:vocamera/widgets/loading.dart';
 
@@ -38,30 +39,16 @@ class AddWordsFromCamera extends StatelessWidget {
         ),
         drawer: buildDrawer(context),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             _buildTextList(context, words),
             Padding(
-              child: new MaterialButton(
-                key: null,
-                onPressed: () =>
-                    context.read<AddWordsFromCameraViewModel>().registerWords(),
-                color: Colors.blueGrey,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                ),
-                elevation: 5.0,
-                minWidth: 200.0,
-                height: 60.0,
-                child: new Text(
-                  "登録",
-                  style: new TextStyle(
-                      fontSize: 22.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: "Roboto"),
-                ),
-              ),
               padding: const EdgeInsets.all(24.0),
+              child: button(
+                '登録',
+                () =>
+                    context.read<AddWordsFromCameraViewModel>().registerWords(),
+              ),
             ),
             Loading(visible: isLoading)
           ],

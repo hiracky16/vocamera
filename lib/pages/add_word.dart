@@ -27,29 +27,35 @@ class AddWord extends StatelessWidget {
         ),
         drawer: buildDrawer(context),
         body: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: new TextField(
-                      decoration: InputDecoration(
-                          labelText: '登録する単語を入力', border: OutlineInputBorder()),
-                      controller: wordController,
-                      onChanged: (value) => context.watch()<UserNotifier>().inputWord(value),
-                      style: new TextStyle(
-                          fontSize: 24.0,
-                          color: const Color(0xFF000000),
-                          fontWeight: FontWeight.w400,
-                          fontFamily: "Roboto"),
-                    )),
-                Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: button('登録', () {
-                      validate() ? register() : print('空');
-                    }))
-              ])
-    );
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: new TextField(
+                decoration: InputDecoration(
+                    labelText: '登録する単語を入力', border: OutlineInputBorder()),
+                controller: wordController,
+                onChanged: (value) =>
+                    context.watch()<UserNotifier>().inputWord(value),
+                style: new TextStyle(
+                    fontSize: 24.0,
+                    color: const Color(0xFF000000),
+                    fontWeight: FontWeight.w400,
+                    fontFamily: "Roboto"),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: button(
+                '登録',
+                () {
+                  validate() ? register() : print('空');
+                },
+              ),
+            )
+          ],
+        ));
   }
 }

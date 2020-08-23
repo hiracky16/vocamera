@@ -23,26 +23,36 @@ class Camera extends StatelessWidget {
     final isLoading = context.watch<CameraViewModel>().isLoading;
     return new Scaffold(
       appBar: AppBar(
-        title: Text("カメラで単語登録"),
+        title: Text("カメラ"),
       ),
       drawer: buildDrawer(context),
       body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            const SizedBox(height: 32),
-            _startCamera(context),
-            Loading(visible: isLoading)
-          ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              const SizedBox(height: 32),
+              Text(
+                '※ カメラで撮った単語を登録することができます。\n注: 英語限定',
+                style: TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.black54,
+                    fontFamily: "Roboto"),
+              ),
+              const SizedBox(height: 16),
+              button(
+                "カメラを開く",
+                () => context.read<CameraViewModel>().onPickImageSelected(),
+              ),
+              const SizedBox(height: 16),
+              Loading(visible: isLoading),
+              const SizedBox(height: 32)
+            ],
+          ),
         ),
       ),
-    );
-  }
-
-  Widget _startCamera(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 10.0),
-      child: button("カメラを開く\n注: 英語限定",
-          () => context.read<CameraViewModel>().onPickImageSelected()),
     );
   }
 }

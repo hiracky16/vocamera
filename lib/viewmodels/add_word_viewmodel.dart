@@ -10,7 +10,7 @@ class AddWordViewModel extends ChangeNotifier {
   bool get isEnabled => word.length > 0;
 
   void registerWord() async {
-    await locator<UserNotifier>().addWordByParamWord(word);
+    await locator<UserNotifier>().addWord(word);
     word = '';
     locator<GlobalKey<NavigatorState>>().currentState.pushNamed('/list');
   }

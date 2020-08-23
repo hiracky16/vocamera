@@ -7,9 +7,5 @@ part 'user.freezed.dart';
 
 @freezed
 abstract class User with _$User {
-  const factory User({
-    FirebaseUser firebaseUser,
-    String word,
-    List<Word> words
-  }) = _User;
+  const factory User({FirebaseUser firebaseUser, List<Word> words}) = _User;
 }

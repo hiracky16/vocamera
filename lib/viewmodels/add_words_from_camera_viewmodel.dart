@@ -34,6 +34,6 @@ class AddWordsFromCameraViewModel extends ChangeNotifier {
   }
 
   Future<void> _addWord(String word) async {
-    await locator<UserNotifier>().addWordByParamWord(word);
+    await locator<UserNotifier>().addWord(word);
   }
 }

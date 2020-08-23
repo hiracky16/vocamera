@@ -11,7 +11,6 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
   FirestoreRepository get storeRepository => read<FirestoreRepository>();
   MlkitRepository get mlkitRepository => read<MlkitRepository>();
 
-  String get word => state.word;
   List<Word> get words => state.words;
   String get _userId => state.firebaseUser.uid;
   bool get isLogined => state.firebaseUser?.uid != null;
@@ -30,11 +29,7 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
     state = state.copyWith(word: value);
   }
 
-  addWord() async {
-    await storeRepository.postWord(_userId, state.word);
-  }
-
-  addWordByParamWord(String word) async {
+  addWord(String word) async {
     await storeRepository.postWord(_userId, word);
   }
 

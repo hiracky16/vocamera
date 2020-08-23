@@ -55,7 +55,7 @@ class _MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Vocamera',
       theme: ThemeData(
         primarySwatch: Colors.yellow,
         visualDensity: VisualDensity.adaptivePlatformDensity,

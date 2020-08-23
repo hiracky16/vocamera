@@ -6,6 +6,10 @@ class FirebaseAuthRepository {
     return await FirebaseAuthApi.signInWithGoogle();
   }
 
+  Future<FirebaseUser> checkLogined() async {
+    return await FirebaseAuthApi.checkLogined();
+  }
+
   void signOut() {
     FirebaseAuthApi.signOutGoogle();
   }

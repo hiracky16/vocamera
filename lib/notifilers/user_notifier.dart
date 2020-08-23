@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:vocamera/data_classes/user/user.dart';
 import 'package:vocamera/data_classes/word/word.dart';
@@ -17,6 +18,11 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
 
   signIn() async {
     final user = await authRepository.signIn();
+    state = state.copyWith(firebaseUser: user);
+  }
+
+  Future checkLogin() async {
+    final user = await authRepository.checkLogined();
     state = state.copyWith(firebaseUser: user);
   }
 

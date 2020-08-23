@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vocamera/notifilers/user_notifier.dart';
 import 'package:vocamera/viewmodels/login_viewmodel.dart';
 import 'package:vocamera/widgets/drawer.dart';
 import 'package:vocamera/widgets/logo.dart';
@@ -20,6 +19,8 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// 初期化を走らせるために
+    context.watch<LoginViewModel>();
     return Scaffold(
       appBar: AppBar(
         title: Text('ログイン'),

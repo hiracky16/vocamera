@@ -65,7 +65,7 @@ class _MainView extends StatelessWidget {
       routes: <String, WidgetBuilder>{
         '/login': (_) => Login.wrapped(),
         '/list': (_) => Words.wrapped(),
-        '/add': (_) => new AddWord(),
+        '/add': (_) => AddWord.wrapped(),
         '/camera': (_) => Camera.wrapped(),
         '/add_words_from_camera': (_) => AddWordsFromCamera.withArguments()
       },

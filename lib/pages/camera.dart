@@ -21,7 +21,7 @@ class Camera extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isLoading = context.watch<CameraViewModel>().isLoading;
-    return new Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: Text("カメラ"),
       ),

@@ -24,8 +24,8 @@ class Words extends StatelessWidget {
     final isLoading = context.watch<WordsViewModel>().isLoading;
 
     return Scaffold(
-      appBar: new AppBar(
-        title: new Text('単語リスト'),
+      appBar: AppBar(
+        title: Text('単語リスト'),
       ),
       key: _scaffoldKey,
       drawer: buildDrawer(context),

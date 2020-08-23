@@ -13,9 +13,9 @@ Widget button(String text, Function pressedCallback) {
       elevation: 5.0,
       minWidth: 200.0,
       height: 60.0,
-      child: new Text(
+      child: Text(
         text,
-        style: new TextStyle(
+        style: TextStyle(
             fontSize: 22.0,
             color: Colors.black54,
             fontWeight: FontWeight.w400,

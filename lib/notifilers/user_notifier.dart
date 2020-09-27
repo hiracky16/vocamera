@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:state_notifier/state_notifier.dart';
 import 'package:vocamera/data_classes/user/user.dart';
 import 'package:vocamera/data_classes/word/word.dart';
+import 'package:vocamera/repositories/analytics.dart';
 import 'package:vocamera/repositories/firebase_auth.dart';
 import 'package:vocamera/repositories/firestore.dart';
 import 'package:vocamera/repositories/mlkit.dart';
@@ -11,6 +12,7 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
   FirebaseAuthRepository get authRepository => read<FirebaseAuthRepository>();
   FirestoreRepository get storeRepository => read<FirestoreRepository>();
   MlkitRepository get mlkitRepository => read<MlkitRepository>();
+  AnalyticsRepository get analyticsRepository => read<AnalyticsRepository>();
 
   List<Word> get words => state.words;
   String get _userId => state.firebaseUser.uid;
@@ -18,11 +20,13 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
 
   signIn() async {
     final user = await authRepository.signIn();
+    await analyticsRepository.setUser(user);
     state = state.copyWith(firebaseUser: user);
   }
 
   Future checkLogin() async {
     final user = await authRepository.checkLogined();
+    await analyticsRepository.setUser(user);
     state = state.copyWith(firebaseUser: user);
   }
 
@@ -33,6 +37,10 @@ class UserNotifier extends StateNotifier<User> with LocatorMixin {
 
   addWord(String word) async {
     await storeRepository.postWord(_userId, word);
+    await analyticsRepository.outputLogEvent(
+      AnalyticsEventType.add_word,
+      {'word': word},
+    );
   }
 
   fetchWords() async {
